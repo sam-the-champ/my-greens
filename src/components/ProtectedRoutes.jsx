@@ -3,7 +3,11 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  
+   if (loading) {
+    return <div className="text-center mt-10">Checking authentication...</div>;
+  }
 
   if (!user) {
     // If no user, redirect to login

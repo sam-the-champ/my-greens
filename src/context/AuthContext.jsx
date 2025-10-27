@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log("Logged in user:", currentUser);
       setUser(currentUser);
       setLoading(false);
     });
@@ -21,11 +22,10 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     await signOut(auth);
   };
-  
 
   return (
-    <AuthContext.Provider value={{ user, logout }}>
-      {!loading && children}
+    <AuthContext.Provider value={{ user, logout, loading }}>
+      {children}
     </AuthContext.Provider>
   );
 };
