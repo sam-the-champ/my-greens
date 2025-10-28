@@ -22,7 +22,7 @@ const Dashboard = () => {
         }`}
       >
         {/* Header */}
-        <div className="p-6 sticky top-0 z-10">
+        <div className="p-6 top-0 z-10">
           <Header toggleSidebar={toggleSidebar} />
         </div>
 
