@@ -1,4 +1,3 @@
-// src/components/Header.jsx
 import React from "react";
 import { motion } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
@@ -9,23 +8,26 @@ const Header = () => {
 
   return (
     <motion.header
-      className="flex items-center justify-between mb-8 bg-[#111] px-6 py-4 rounded-2xl shadow-lg "
+      className="flex justify-between items-center bg-[#111] rounded-2xl p-5 shadow-lg border border-gray-800 "
       initial={{ opacity: 0, y: -30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7 }}
+      transition={{ duration: 0.6 }}
     >
-      <div>
-        <h1 className="text-2xl font-semibold text-emerald-400">
-          Welcome back, {user?.displayName || "Eco Hero"} 👋
-        </h1>
-        <p className="text-gray-400 text-sm mt-1">Let’s make today more sustainable 🌱</p>
+      <div >
+        <h2 className="text-xl font-semibold text-white">
+          Welcome back,{" "}
+          <span className="text-green-400">{user?.displayName || "Eco Hero"}</span> 🌱
+        </h2>
+        <p className="text-gray-400 text-sm mt-1">
+          Let’s make the planet greener today.
+        </p>
       </div>
 
       <motion.div
-        className="w-11 h-11 bg-gray-800 rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition"
         whileHover={{ scale: 1.1 }}
+        className="bg-gray-900 p-3 rounded-full border border-gray-700"
       >
-        <User size={22} className="text-emerald-400" />
+        <User className="text-green-400" size={24} />
       </motion.div>
     </motion.header>
   );

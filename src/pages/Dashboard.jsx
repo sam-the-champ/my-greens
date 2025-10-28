@@ -1,20 +1,41 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Sidebar from '../components/Sidebar'
-import { useAuth } from '../context/AuthContext'
-import Header from '../components/Header'
+import React, { useState } from "react";
+import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
+import ScoreCard from "../components/ScoreCard";
+import ChartSection from "../components/ChartSection";
+import VideoSection from "../components/VideoSection";
+import InsightsSection from "../components/InsightsSection";
 
 const Dashboard = () => {
-    const { user } = useAuth();
-  console.log("Logged in user:", user);
-  return (
-    <div>
-      <Sidebar/>
-      <main className="flex-1 bg-gray-900 p-4 sm:p-6 min-h-screen overflow-y-auto rounded-xl">
-        <Header/>
-      </main>
-    </div>
-  )
-}
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
-export default Dashboard
+  return (
+    <div className="flex min-h-screen text-white">
+      {/* Sidebar */}
+      <Sidebar isOpen={sidebarOpen} toggle={toggleSidebar} />
+
+      {/* Main Dashboard Area */}
+      <div
+        className={`flex-1 flex flex-col transition-all duration-300 ${
+          sidebarOpen ? "ml-60 md:ml-60" : "ml-0 md:ml-60"
+        }`}
+      >
+        {/* Header */}
+        <div className="p-6 sticky top-0 z-10">
+          <Header toggleSidebar={toggleSidebar} />
+        </div>
+
+        {/* Main Content */}
+        <main className="p-6 space-y-6">
+          <ScoreCard />
+          <ChartSection />
+          <VideoSection />
+          <InsightsSection />
+        </main>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
