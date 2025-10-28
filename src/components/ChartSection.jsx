@@ -13,6 +13,8 @@ const ChartSection = () => {
       { day: "Wed", score: 60 },
       { day: "Thu", score: 90 },
       { day: "Fri", score: 50 },
+      { day: "Sat", score: 75 },
+      { day: "Sun", score: 85 },
     ]);
   }, []);
 
