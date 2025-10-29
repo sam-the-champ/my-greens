@@ -26,9 +26,9 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/EcoMarket" element={<EcoMarket/>}/>
-          <Route path="/Profile" element={<Profile/>}/>
-          <Route path="/Blog" element={<Blog/>}/>
+          <Route path="/EcoMarket" element={<ProtectedRoute><EcoMarket/></ProtectedRoute>}/>
+          <Route path="/Profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
+          <Route path="/Blog" element={<ProtectedRoute><Blog/></ProtectedRoute>}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

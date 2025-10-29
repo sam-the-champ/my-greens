@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 import { User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { user } = useAuth();
@@ -23,12 +24,14 @@ const Header = () => {
         </p>
       </div>
 
-      <motion.div
-        whileHover={{ scale: 1.1 }}
-        className="bg-gray-900 p-3 rounded-full border border-gray-700"
-      >
-        <User className="text-green-400" size={24} />
-      </motion.div>
+      <Link to="/profile">
+  <motion.div
+    whileHover={{ scale: 1.1 }}
+    className="bg-gray-900 p-3 rounded-full border border-gray-700 cursor-pointer"
+  >
+    <User className="text-green-400" size={24} />
+  </motion.div>
+</Link>
     </motion.header>
   );
 };

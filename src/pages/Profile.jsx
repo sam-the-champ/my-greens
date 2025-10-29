@@ -30,15 +30,9 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex bg-[#0a0a0a] text-gray-100 min-h-screen relative">
+     <div className="flex min-h-screen bg-[#0a0a0a] text-white flex-col md:flex-row">
       {/* Sidebar */}
-      <div
-        className={`fixed z-50 md:relative transition-transform duration-300 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        }`}
-      >
-        <Sidebar />
-      </div>
+      <Sidebar className="hidden md:block" />
 
       {/* Main content */}
       <main className="flex-1 p-4 sm:p-6 md:p-8 md:ml-64 w-full overflow-y-auto">

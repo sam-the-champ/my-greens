@@ -141,12 +141,12 @@ const Blog = () => {
   ];
 
   return (
-    <div className="flex bg-[#0a0a0a] text-gray-100 min-h-screen sm:p-6 md:p-8 md:ml-64 w-full overflow-y-auto ">
+    <div className="flex bg-[#0a0a0a] text-gray-100 min-h-screen sm:p-6 md:p-8 md:ml-58  ">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content */}
-      <main className="flex-1 p-6 lg:p-10 overflow-y-auto">
+      <main className="flex-1 p-6 lg:p-10 ">
         {/* Header */}
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-3xl font-bold flex items-center gap-2 text-green-400">
@@ -156,7 +156,7 @@ const Blog = () => {
         </div>
 
         {/* Blog Grid */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post, index) => (
             <motion.article
               key={post.id}
