@@ -70,144 +70,97 @@ const EcoMarket = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-[#0a0a0a] text-white">
-      {/* Sidebar */}
-      <Sidebar />
+    <div className="flex min-h-screen bg-[#0a0a0a] text-white flex-col md:flex-row">
+  {/* Sidebar */}
+  <Sidebar className="hidden md:block" />
 
-      {/* Main Content */}
-      <main className="flex-1 ml-64 p-6 space-y-8">
-        {/* Header */}
-        <div className="flex justify-between items-center border-b border-gray-800 pb-4">
-          <h1 className="text-2xl font-semibold text-green-400">Eco Market</h1>
-          <div className="flex items-center gap-3">
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="bg-[#111] border border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-            />
-            <button
-              onClick={() => setIsCartOpen(true)}
-              className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg flex items-center gap-2"
-            >
-              <ShoppingCart size={18} /> Cart ({cart.length})
-            </button>
-          </div>
-        </div>
-
-        {/* Filters */}
-        <div className="flex gap-3 flex-wrap">
-          {["All", "Lifestyle", "Clothing", "Tech"].map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`px-4 py-2 rounded-lg text-sm ${
-                filter === cat
-                  ? "bg-green-600 text-white"
-                  : "bg-[#111] text-gray-400 hover:bg-[#222]"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Products Grid */}
-        <motion.div
-          layout
-          className="grid md:grid-cols-3 gap-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+  {/* Main Content */}
+  <main className="flex-1 md:ml-64 p-4 sm:p-6 space-y-8">
+    {/* Header */}
+    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 border-b border-gray-800 pb-4">
+      <h1 className="text-2xl font-semibold text-green-400">Eco Market</h1>
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="bg-[#111] border border-gray-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 w-full sm:w-auto"
+        />
+        <button
+          onClick={() => setIsCartOpen(true)}
+          className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg flex items-center justify-center gap-2 text-sm"
         >
-          {filteredProducts.map((product) => (
-            <motion.div
-              key={product.id}
-              className="bg-[#111] border border-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg hover:shadow-green-900/30 transition-all"
-              whileHover={{ scale: 1.03 }}
-            >
-              <img
-                src={product.image}
-                alt={product.title}
-                className="w-full h-40 object-cover"
-              />
-              <div className="p-4 space-y-2">
-                <div className="flex justify-between items-center">
-                  <h3 className="font-semibold text-lg">{product.title}</h3>
-                  <button onClick={() => toggleFavorite(product.id)}>
-                    <Heart
-                      size={20}
-                      className={`${
-                        favorites.includes(product.id)
-                          ? "text-red-500"
-                          : "text-gray-500"
-                      } hover:text-red-400 transition`}
-                    />
-                  </button>
-                </div>
-                <p className="text-gray-400 text-sm">{product.category}</p>
-                <p className="text-green-400 font-semibold">${product.price}</p>
-                <button
-                  onClick={() => addToCart(product)}
-                  className="mt-2 w-full bg-green-600 hover:bg-green-700 py-2 rounded-lg text-sm"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </main>
+          <ShoppingCart size={18} /> Cart ({cart.length})
+        </button>
+      </div>
+    </div>
 
-      {/* Cart Drawer */}
-      {isCartOpen && (
-        <motion.div
-          initial={{ x: 300 }}
-          animate={{ x: 0 }}
-          exit={{ x: 300 }}
-          transition={{ duration: 0.4 }}
-          className="fixed right-0 top-0 h-full w-80 bg-[#111] border-l border-gray-800 shadow-lg z-50 p-6 flex flex-col"
+    {/* Filters */}
+    <div className="flex flex-wrap gap-2">
+      {["All", "Lifestyle", "Clothing", "Tech"].map((cat) => (
+        <button
+          key={cat}
+          onClick={() => setFilter(cat)}
+          className={`px-3 py-2 rounded-lg text-sm ${
+            filter === cat
+              ? "bg-green-600 text-white"
+              : "bg-[#111] text-gray-400 hover:bg-[#222]"
+          }`}
         >
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold text-green-400">Your Cart</h2>
-            <button onClick={() => setIsCartOpen(false)}>
-              <X size={22} className="text-gray-400 hover:text-white" />
-            </button>
-          </div>
-          <div className="flex-1 overflow-y-auto space-y-4">
-            {cart.length === 0 ? (
-              <p className="text-gray-400 text-sm">Your cart is empty.</p>
-            ) : (
-              cart.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex justify-between items-center border-b border-gray-800 pb-2"
-                >
-                  <p>{item.title}</p>
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="text-red-500 hover:text-red-400 text-sm"
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
-          {cart.length > 0 && (
-            <div className="mt-4">
-              <button
-                className="w-full bg-green-600 hover:bg-green-700 py-2 rounded-lg text-sm"
-                onClick={() => alert("Checkout feature coming soon!")}
-              >
-                Checkout
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    {/* Products Grid */}
+    <motion.div
+      layout
+      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {filteredProducts.map((product) => (
+        <motion.div
+          key={product.id}
+          className="bg-[#111] border border-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg hover:shadow-green-900/30 transition-all"
+          whileHover={{ scale: 1.03 }}
+        >
+          <img
+            src={product.image}
+            alt={product.title}
+            className="w-full h-40 object-cover"
+          />
+          <div className="p-4 space-y-2">
+            <div className="flex justify-between items-center">
+              <h3 className="font-semibold text-lg">{product.title}</h3>
+              <button onClick={() => toggleFavorite(product.id)}>
+                <Heart
+                  size={20}
+                  className={`${
+                    favorites.includes(product.id)
+                      ? "text-red-500"
+                      : "text-gray-500"
+                  } hover:text-red-400 transition`}
+                />
               </button>
             </div>
-          )}
+            <p className="text-gray-400 text-sm">{product.category}</p>
+            <p className="text-green-400 font-semibold">${product.price}</p>
+            <button
+              onClick={() => addToCart(product)}
+              className="mt-2 w-full bg-green-600 hover:bg-green-700 py-2 rounded-lg text-sm"
+            >
+              Add to Cart
+            </button>
+          </div>
         </motion.div>
-      )}
-    </div>
+      ))}
+    </motion.div>
+  </main>
+</div>
+
   );
 };
 

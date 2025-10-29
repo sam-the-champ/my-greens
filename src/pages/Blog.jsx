@@ -141,7 +141,7 @@ const Blog = () => {
   ];
 
   return (
-    <div className="flex ml-64 bg-[#0a0a0a] text-gray-100 min-h-screen">
+    <div className="flex bg-[#0a0a0a] text-gray-100 min-h-screen sm:p-6 md:p-8 md:ml-64 w-full overflow-y-auto ">
       {/* Sidebar */}
       <Sidebar />
 
