@@ -6,6 +6,10 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoutes";
 
+import EcoMarket from "./pages/EcoMarket";
+import Profile from "./pages/Profile";
+import Blog from "./pages/Blog";
+
 function App() {
   return (
     <AuthProvider>
@@ -22,6 +26,9 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/EcoMarket" element={<EcoMarket/>}/>
+          <Route path="/Profile" element={<Profile/>}/>
+          <Route path="/Blog" element={<Blog/>}/>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

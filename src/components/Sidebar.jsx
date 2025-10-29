@@ -11,6 +11,7 @@ import {
   BarChart2,
   Menu,
   X,
+  Newspaper,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -71,7 +72,7 @@ const Sidebar = () => {
           </Link>
 
           <Link
-            to="/carbon-tracker"
+            to="/CarbonTracker"
             className="flex items-center gap-3 hover:text-green-400 transition"
             onClick={() => setIsOpen(false)}
           >
@@ -79,7 +80,7 @@ const Sidebar = () => {
           </Link>
 
           <Link
-            to="/eco-market"
+            to="/EcoMarket"
             className="flex items-center gap-3 hover:text-green-400 transition"
             onClick={() => setIsOpen(false)}
           >
@@ -87,7 +88,7 @@ const Sidebar = () => {
           </Link>
 
           <Link
-            to="/profile"
+            to="/Profile"
             className="flex items-center gap-3 hover:text-green-400 transition"
             onClick={() => setIsOpen(false)}
           >
@@ -95,11 +96,11 @@ const Sidebar = () => {
           </Link>
 
           <Link
-            to="/settings"
+            to="/Blog"
             className="flex items-center gap-3 hover:text-green-400 transition"
             onClick={() => setIsOpen(false)}
           >
-            <Settings size={20} /> Settings
+            <Newspaper size={20} /> Blog
           </Link>
         </nav>
 
