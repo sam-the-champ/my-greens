@@ -1,15 +1,40 @@
-import React from "react";
+// src/components/ScoreCard.jsx
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import EarthImage from "../assets/earth.png"; // You’ll need to add this image
+import EarthImage from "../assets/earth.png";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase";
+import { getAuth } from "firebase/auth";
 
 const ScoreCard = () => {
-  const carbonScore = 72; // later fetched dynamically from Firestore
+  const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const auth = getAuth(); // ✅ properly initialize Firebase Auth
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    if (!user) return;
+
+    const today = new Date().toISOString().split("T")[0];
+    const scoreRef = doc(db, "users", user.uid, "dailyScores", today);
+
+    // ✅ Real-time listener for today's score
+    const unsubscribe = onSnapshot(scoreRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setScore(docSnap.data().score.toFixed(0));
+      } else {
+        setScore(0);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
 
   return (
-    <>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {/* Score Circle */}
       <motion.div
         className="bg-[#111] rounded-2xl p-8 shadow-xl border border-gray-800 flex flex-col items-center"
@@ -20,8 +45,8 @@ const ScoreCard = () => {
         <h3 className="text-lg text-gray-300 mb-4">Your Carbon Score</h3>
         <div className="w-40 h-40">
           <CircularProgressbar
-            value={carbonScore}
-            text={`${carbonScore}%`}
+            value={loading ? 0 : score}
+            text={loading ? "..." : `${score}%`}
             styles={buildStyles({
               pathColor: "#22c55e",
               textColor: "#fff",
@@ -30,7 +55,9 @@ const ScoreCard = () => {
           />
         </div>
         <p className="text-gray-400 text-sm mt-4">
-          Based on your recent activity
+          {loading
+            ? "Fetching your latest activity..."
+            : "Based on your recent activity"}
         </p>
       </motion.div>
 
@@ -54,7 +81,6 @@ const ScoreCard = () => {
         </p>
       </motion.div>
     </div>
-    </>
   );
 };
 
