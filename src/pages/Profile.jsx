@@ -18,10 +18,10 @@ const Profile = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profile, setProfile] = useState({
     name: "Olalekan Samson Ogundimu",
-    email: "samson@example.com",
+    email: "ogundimuolalekan55@gmail.com",
     location: "Lagos, Nigeria",
     bio: "Eco-conscious developer and sustainability advocate 🌱",
-    ecoScore: 87,
+    ecoScore: 72,
     carbonSaved: 124.5,
   });
 

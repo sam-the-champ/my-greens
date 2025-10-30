@@ -152,7 +152,7 @@ const Blog = () => {
           <h2 className="text-3xl font-bold flex items-center gap-2 text-green-400">
             <PenSquare size={26} /> Eco Blog
           </h2>
-          <p className="italic text-gray-400">✨ Discover — Learn — Act</p>
+          <p className="italic text-gray-400">✨ Discover, Learn, Act</p>
         </div>
 
         {/* Blog Grid */}
