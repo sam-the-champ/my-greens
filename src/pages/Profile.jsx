@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useAuth } from "../context/AuthContext";
 import {
   Leaf,
   Menu,
@@ -28,7 +29,7 @@ const Profile = () => {
   const handleChange = (field, value) => {
     setProfile({ ...profile, [field]: value });
   };
-
+   const { user } = useAuth();
   return (
      <div className="flex min-h-screen bg-[#0a0a0a] text-white flex-col md:flex-row">
       {/* Sidebar */}
